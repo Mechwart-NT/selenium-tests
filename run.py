@@ -2,6 +2,12 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By
+
+from rooms.room_zero import room_zero
+from rooms.room_one import room_one
+from rooms.room_two import room_two
+
 
 def get_driver(headless=False):
     options = Options()
@@ -14,12 +20,13 @@ def get_driver(headless=False):
     driver.maximize_window()
     return driver
 
-def test_google_title():
+def start_bot():
     driver = get_driver()
-    driver.get("https://www.google.com")
+    driver.get("https://csati.nemestamas.hu/")
 
-    assert "Google" in driver.title
-
+    room_zero(driver)
+    room_one(driver)
+    room_two(driver)
     # driver.quit()
 
-test_google_title()
+start_bot()
